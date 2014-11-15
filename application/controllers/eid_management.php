@@ -1598,10 +1598,10 @@ class Eid_Management extends Home_controller {
 					}else{
 						$bcc_email="smutheu@clintonhealthaccess.org,tngugi@clintonhealthaccess.org,jhungu@clintonhealthaccess.org,jlusike@clintonhealthaccess.org,onjathi@clintonhealthaccess.org,skadima@clintonhealthaccess.org,gauthierabdala@gmail.com";
 					}
-			  		echo "<br>".$lab_name."<br>";
-					echo $main_email."<br>";
-					echo $cc_email."<br>";
-					echo $bcc_email."<br>";
+			  		//echo "<br>".$lab_name."<br>";
+					//echo $main_email."<br>";
+					//echo $cc_email."<br>";
+					//echo $bcc_email."<br>";
 					//die();
 					$this->email->bcc($bcc_email);
 					$this->email->attach($attachment);
