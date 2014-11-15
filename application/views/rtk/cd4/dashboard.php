@@ -51,7 +51,7 @@
             $.post('<?php echo base_url("cd4_management"); ?>/sync_nascop/' + month + '/' + year, function(data) {
                 $('#pager-content').html(data);
             }).done(function(){
-                        location.reload(true);
+                        //location.reload(true);
 
             });
             /*

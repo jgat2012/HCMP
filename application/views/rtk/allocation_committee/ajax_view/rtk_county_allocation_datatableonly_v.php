@@ -1,5 +1,5 @@
 <script type="text/javascript" language="javascript" src="<?php echo base_url(); ?>assets/datatable/jquery.dataTables.js"></script>
-<script src="http://tableclothjs.com/assets/js/jquery.tablecloth.js"></script>
+<script src="<?php echo base_url(); ?>assets/tablecloth/assets/js/jquery.tablecloth.js"></script>
 
 
 <script type="text/javascript">
@@ -17,25 +17,36 @@
 
         $("#allocate").button().click(function() {
 
-        	var loading = '<div id="loading"> &nbsp;&nbsp;<img src="<?php echo base_url(); ?>assets/img/ajax-loader.gif"><span style="font-size: 13px;color: #92CA8F;margin-left:100px; font-family: calibri;">Saving Allocations</span></div>';
-        	$('#allocation-response').html(loading);
+            var loading = '<div id="loading"> &nbsp;&nbsp;<img src="<?php echo base_url(); ?>assets/img/ajax-loader.gif"><span style="font-size: 13px;color: #92CA8F;margin-left:100px; font-family: calibri;">Saving Allocations</span></div>';
+            $('#allocation-response').html(loading);        
 
-      	
+            var data = $('#myform').serializeArray();
+            
+            // $.ajax({
+            //     url: '../rtk_allocation_data/',
+            //     type: 'POST',
+            //     data: { form_data: data },
+            //     success: function(result) {
+            //         console.log(result);
+            //     }
+            // });
+           
+            $.post('../rtk_allocation_data/',
+                {form_data: data},     
 
-            var data = $('#myform').serialize();
-            $.post(
-                    '../rtk_allocation_data/',
-                    {data: data},
-            function(response) {
-                $('#allocation-response').html(response);
-                $('#allocation-response').addClass('alert alert-success');
-               location.reload(true);
-//                $( "#loading" ).hide();
-            }
-            );
+                function(response) {  
+                    alert(response);                  
+                    $('#allocation-response').html(response);
+                    $('#allocation-response').addClass('alert alert-success');
+                    // location.reload(true);
+                                    $( "#loading" ).hide();
+                }).fail(function(request,error) {
+                    console.log(arguments);
+                    alert ( " Can't do because: " + error );
+                });            
+            //alert(data); 
 
-
-        });
+            });
 
         $('.navtbl li a').click(function(e) {
             var $this = $(this);
@@ -55,12 +66,12 @@
 
 <style>
     @import "<?php echo base_url(); ?>assets/datatable/media/css/jquery.dataTables.css";
-    @import "http://tableclothjs.com/assets/css/tablecloth.css";
+    @import "<?php echo base_url(); ?>assets/tablecloth/assets/css/tablecloth.css";
 
     .alerts{
         width:95%;
         height:auto;
-        background: #E3E4FA;	
+        background: #E3E4FA;    
         padding-bottom: 2px;
         padding-left: 2px;
         margin-left:0.5em;
@@ -95,42 +106,42 @@
         <?php foreach ($districts_in_county as $value) { ?>
             <li class=""><a href="#"><?php echo $value['district']; ?></a></li>
         <?php } ?>
-            <li class="disabled" style=""><a href="#">&nbsp;</a></li>     
-            <li class="disabled" style="border-left: solid 0.1em #ccc;"><a href="#">&nbsp;</a></li>
-
-            <li class=""><a href="#">Old-Algorithm</a></li>
-            <li class=""><a href="#">New-Algorithm</a></li>
        <a class="pull-right" href="../county_allocation/<?php echo $county_id;?>" style="line-height: 20px;margin: 8px 26px 0px 0px;text-decoration: none;color: #0088cc;">View <?php echo $countyname;?>  Allocations</a> 
 
     </ul>
 </div>
+
 <div style="height:411px;overflow:scroll;">
     <?php
     $attributes = array('name' => 'myform', 'id' => 'myform');
     echo form_open('rtk_management/rtk_allocation_data/' . $county_id, $attributes);
     ?>
 
-    <table id="example" style="width:96%">
+    <table id="example" style="width:96%" border="0">
         <thead>
             <tr>
-                <th colspan="3">Facility Details</th>
-                <th rowspan="2"><br/><b>Commodity</b></th>
-                <th colspan="5">Quantity(tests)</th>
-              
-                <th rowspan="2"><b>Qty to allocate</b>(Kits)</th>
-                <th rowspan="2"><b>Qty Issued<br />(From KEMSA)</b></th>
-                <th rowspan="2"><b>Status</b></th>
-            </tr>
-            <tr>
-                <th><b>MFL</b></th>
-                <th><b>Facility Name</b></th>
-                <th><b>Sub-County</b></th>
-                <th><b>Received</b></th>
-                <th><b> Consumed</b></th>
-                <th><b>End balance<br />Physical Count</b></th>
-                <th><b>Qty Requested <br />for Re-Supply</b></th>
-                  <th rowspan="1"><b>AMC </b></th>
-            </tr>
+            <th><b>District</b></th>
+            <th><b>MFL</b></th>
+            <th><b>Facility Name</b></th>    
+            <th colspan="2"><b>Screening KHB</b></th>
+            <th colspan="2"><b>Confirmatory Unigold</b></th>
+            <th colspan="2"><b>Tie Breaker</b></th>
+            <th><b>Status</b></th>                                              
+        </tr>
+
+        <tr>
+            <th></th>
+            <th></th>
+            <th></th>    
+            <th>AMC</th>
+            <th>QTY to Allocate</th>
+            <th>AMC</th>
+            <th>QTY to Allocate</th>
+            <th>AMC</th>                                                
+            <th>QTY to Allocate</th>
+            <th></th>
+        
+        </tr>
         </thead>
         <tbody><?php echo $table_body; ?></tbody>
     </table>
@@ -140,5 +151,5 @@
 <input class="pull-left" type="button" id="allocate" value="Allocate" style="background: #F8F7F7; padding: 7px;margin: 8px 0px 5px 19px;color: #0088cc;font-family: calibri;font-size: 18px;border: 1px solid #ccc;">
 <div id="allocation-response"></div>
 </div>
-<?php echo form_close(); ?>	
+<?php echo form_close(); ?> 
 </div>

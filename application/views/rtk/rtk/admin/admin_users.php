@@ -84,7 +84,7 @@ foreach ($res_arr2 as $value) {
     .dataTables_wrapper{
         margin-left: 16px;
         font-size: 11.5px;
-        background: #FFFFEC;
+        background: #F9F9F9;
         padding: 12px;
     }
     .dataTables_filter,.dataTables_length{

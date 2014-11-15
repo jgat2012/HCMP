@@ -61,7 +61,7 @@
 </div>
  
 
-
+<?php include('../rtk/allocation/allocation_links.php');?>
 
  <div class="container" style="width: 96%; margin: auto;">
  <table width="98%" border="0" class=""  id="example">

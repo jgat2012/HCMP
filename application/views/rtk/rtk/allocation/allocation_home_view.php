@@ -22,8 +22,8 @@
 
 
 
-
-<div class="row" style="width:100%; margin-top:2%;margin-left:4%;">
+<div id="nav" style="margin-top:10px;width:100%"><?php include('allocation_links.php');?></div>
+<div class="row" style="width:100%; margin-top:4%;margin-left:4%;float:left;">
 <!--div class="span3">
 <<ul class="nav nav-tabs nav-stacked">
                  <li class="active"><a href="#"></a></li>
@@ -67,3 +67,9 @@ Last Allocated <?php echo date('d,F Y', $zone_d_stats['last_allocation']); ?>
 
 
 </div>
+
+<script type="text/javascript">
+  $('#trend_tab').removeClass('active_tab');    
+  $('#stocks_tab').removeClass('active_tab');  
+  $('#allocations_tab').addClass('active_tab');
+</script>

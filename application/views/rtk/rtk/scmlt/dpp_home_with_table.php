@@ -22,8 +22,8 @@ $englishdate = date('F, Y', strtotime($monthyear));
 </style>
 
 <?php if ($this->session->userdata('switched_as') == 'scmlt') { ?>
-<div id="fixed-topbar" style="position: fixed;margin-left:18%; top: 74px;background: #708BA5; width: 100%;padding: 7px 1px 0px 13px;border-bottom: 1px solid #ccc;border-bottom: 1px solid #ccc;border-radius: 4px 0px 0px 4px;">
-    <span class="lead" style="color: #ccc;">Switch back to RTK Manager</span>
+<div id="fixed-topbar" style="position: fixed;margin-left:18%; top: 74px;background: rgb(164, 213, 58); width: 100%;padding: 7px 1px 0px 13px;border-bottom: 1px solid #ccc;border-bottom: 1px solid #ccc;border-radius: 4px 0px 0px 4px;">
+    <span class="lead" style="color: #fff;">Switch back to RTK Manager</span>
     &nbsp;
     &nbsp;
     <a href="<?php echo base_url(); ?>rtk_management/switch_district/0/rtk_manager/0/home_controller/0//" class="btn btn-primary" id="switch_idenity" style="margin-top: -10px;">Go</a>

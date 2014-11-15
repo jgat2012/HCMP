@@ -345,5 +345,7 @@ public static function get_county_details($county_id){
 		$result = $query -> execute(array(), Doctrine::HYDRATE_ARRAY);
 		return $result;
 	}
+
+
 	
 	}

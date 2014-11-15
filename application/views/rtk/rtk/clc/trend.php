@@ -48,11 +48,11 @@ table{
                         <div id="container" style="min-width: 310px;width:100%;height: 360px;float:left; margin: 0 auto;border: ridge 1px;"></div>
                         
                         <div style="margin-top:10px;">
-                        County Progress: <?php echo $reporting_percentage; ?>%
+                        County Progress: <?php echo $total_percentage; ?>%
                         <div class="progress">
                             <div class="progress">
                               <div class="progress-bar" role="progressbar" aria-valuenow="2" aria-valuemin="0" aria-valuemax="100" style="width: <?php echo $reporting_percentage; ?>%;">
-                                <?php echo $reporting_percentage; ?>%
+                                <?php echo $total_percentage; ?>%
                             </div>
                         </div>
 

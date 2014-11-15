@@ -44,7 +44,7 @@
 
 <div class="row" style="width:100%; margin-top:2%;margin-left:4%;">
   <div id="rtk" class="dash span">
-    <a href="<?php echo base_url().'rtk_management/allocation_home'?>">
+    <a href="<?php echo base_url().'rtk_management/allocation_trend'?>">
       <div class="details">RTK ALLOCATION</div><br/>
       <div class="facils">Total Facilities Supported: <?php echo $rtk[0]['rtk'];?></div>      
     </a>

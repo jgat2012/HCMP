@@ -161,7 +161,7 @@ $(document).ready(function(){
                     }
                 },
                 tooltip: {
-                    headerFormat: '<span style="font-size:10px">{point.key}</span><table>',
+                    headerFormat: '<span style="font-size:3px">{point.key}</span><table>',
                     pointFormat: '<tr><td style="color:{series.color};padding:0">{series.name}: </td>' +
                     '<td style="padding:0"><b>{point.y:.0f} Reports</b></td></tr>',
                     footerFormat: '</table>',

@@ -319,7 +319,8 @@ class cd4_Management extends MY_Controller {
 
 
         $county_id = $county_id - 1;
-        $data['content_view'] = 'rtk/cd4/ajax_view/county_allocation_v';
+        //$data['content_view'] = 'rtk/cd4/ajax_view/county_allocation_v';
+        $data['content_view'] = 'rtk/cd4/county_allocation_v';
         $htm = '';
         $htm.='<ul class="facility-list">';
 
@@ -333,7 +334,7 @@ class cd4_Management extends MY_Controller {
                 if ($status !== "Not Reported") {
                     $htm .='<li><a href="#' . $facility_mfl . '" class="allocate" onClick="showpreview(' . $facility_mfl . ',' . $previous_month . ')" >' . $facilityname . '</a></li>';
                 } else {
-                    $htm .='<li style="background: #FF0000;"><a href="#" title="' . $facilityname . ' has not reported yet" class="allocate" onClick="alertnonreported()"  >' . $facilityname . '</a></li>';
+                    $htm .='<li style=""><a href="#" title="' . $facilityname . ' has not reported yet" class="allocate" onClick="alertnonreported()"  >' . $facilityname . '</a></li>';
                 }
 
 
@@ -344,7 +345,7 @@ class cd4_Management extends MY_Controller {
 
 
         $data['htm'] = $htm;
-        $data['banner_text'] = 'Allocate ' . $countyname;
+        $data['banner_text'] = 'Facilities in ' . $countyname;
         $data['title'] = 'CD4 Allocation ' . $countyname;
         $data['countyname'] = $countyname;
 
@@ -1132,8 +1133,8 @@ AND district =' . $district . '');
         $this->db->insert('api_facilities', $data);
     }
 
-    public function sync_nascop($month = null, $year = null) {
-        $url = 'http://nascop.org/cd4/reportingfacsummary.php?yr=' . $year . '&month=' . $month;
+   public function sync_nascop($month = null, $year = null) {
+        $url = 'http://nascop.org/cd4/reportingfacsummary.php?year=' . $year . '&month=' . $month;
         if (!$this->_check_url_working($url)) {
             echo ("NASCOP link is down");
             die;
@@ -1141,7 +1142,7 @@ AND district =' . $district . '');
         $sql = 'select count(id) as count from `api_gen` where month=' . $month . ' AND year =' . $year;
         $result = $this->db->query($sql);
         $id = $result->result_array();
-        $num_rows = $id[0]['count'];
+        $num_rows = $id[0]['count'];        
         if ($num_rows == 0) {
             // do insert
             $allfacilities = $this->api_get_facilities($month, $year);
@@ -1174,13 +1175,13 @@ AND district =' . $district . '');
             $reported_facilities_to_sync = array();
             $jsonfacilities = json_encode($allfacilities);
             $now = time();
-            $data = array(
-                'id' => 'NULL',
+            $data = array(                
                 'json' => $jsonfacilities,
                 'date_sync' => $now,
                 'month' => $month,
                 'year' => $year
             );
+            
             $this->db->where('month', $month);
             $this->db->where('year', $year);
             $this->db->update('api_gen', $data);
@@ -1205,6 +1206,7 @@ AND district =' . $district . '');
         }
         echo "Success: Facilities Sync Complete.";
     }
+
 
     public function allocated_cd4($MFLCode, $year, $month) {
         $date = $month . '' . $year;
